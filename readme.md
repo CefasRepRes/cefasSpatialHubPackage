@@ -18,7 +18,7 @@ Install the package form Github and load the library
 
 ```r
 
-library (devtools)
+library (devtools) ## Install "devtools" if not available
 install_github("CefasRepRes/cefasSpatialHubPackage")
 
 library (cefasSpatialHub)
