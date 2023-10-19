@@ -32,7 +32,7 @@ getWebServiceFields  = function (web_service, layer_index ) {
 
   webservice_api        =  paste(webservice_api, webservice_layer_index , sep = '/')
   webservice_base       =  parse_url(webservice_api )
-  webservice_base$path  =  paste(age_base$path ,  'query', sep = '/' )
+  webservice_base$path  =  paste(webservice_base$path ,  'query', sep = '/' )
 
 
   ## 2.1 GET the list of web service fields to build your query upon :
