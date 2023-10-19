@@ -1,0 +1,15 @@
+Package: cefasSpatialHub
+Type: Package
+Title: R Package with functionalities to access and analyse spatial data in Cefas Spatial Hub 
+Version: 0.1.0
+Author: Roi Martinez
+Maintainer: Roi Martinez <roi.martinez@cefas.gov.uk>
+Description: R Package with functionalities to access and analyse spatial data in Cefas Spatial Hub. The package include funcitons for: 
+    - Access to Spatial Hub web services from R 
+    - The Spatial Hub web service are accesible as spatial objects or R Data Frame
+    - Use the Spatial Hub web service API to run some analysis on the Sptial Hub servers side ( enhance speed perfomance)
+License: Crown 
+Encoding: UTF-8
+LazyData: true
+Imports: httr, jsonlite, sf
+RoxygenNote: 7.2.3
