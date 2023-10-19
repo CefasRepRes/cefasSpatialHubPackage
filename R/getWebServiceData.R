@@ -62,7 +62,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
   ## 2.3 Finally, build the query with all parameters
 
-  httr::bui
+
 
   web_service_request = build_url(webservice_base)
 
