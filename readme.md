@@ -19,7 +19,7 @@ Install the package form Github and load the library
 ```r
 
 library (devtools) ## Install "devtools" if not available
-install_github("CefasRepRes/cefasSpatialHubPackage")
+install_github("CefasRepRes/cefasSpatialHubPackage",  build_vignettes = TRUE) ## Skip updates to avoid issues ( option 3 ) 
 
 library (cefasSpatialHub)
 
