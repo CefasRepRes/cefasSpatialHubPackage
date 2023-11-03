@@ -44,10 +44,16 @@ landings_map %>% slice ( 1:100 ) %>% ggplot ( aes( fill = total_tons, color = to
 ```
 
 ### Explore functions documentation : 
-
+Access to function helps document
 ```r
 ?getWebServicesData
 ?getWebServicesFields
+```
 
+#### More advance documentation Vignettes
 
+```r
+
+browseVignettes("cefasSpatialHub")
+help("cefasSpatialHub")
 ```
