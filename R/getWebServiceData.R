@@ -13,6 +13,7 @@
 #' }
 #' @param output_fields An array with the list of the fields that are reuiqred with the output
 #' @param spatial_layer A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format
+#' @param token if the api is protected a token must be provided
 #'
 #' @return The data extracted as a Data Frame or Spatial SF format
 #'
@@ -29,7 +30,7 @@
 #' @export getWebServiceData
 
 
-getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", output_fields = "*", spatial_layer = TRUE  ) {
+getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", output_fields = "*", spatial_layer = TRUE  , token_str = NULL) {
 
 
 
@@ -57,8 +58,9 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
   webservice_base$query = list(  where =  where_clause,                                    ## specify conditions of teh data to be extracted
                                  outFields = output_fields,                                ## specify a list of columns to be return or all "*"
                                  returnGeometry = return_geom,                             ## specify if the geometry column is required
-                                 f = format_out                                            ## specify the OUTPUT FORMAT
-  )
+                                 f = format_out ,                                          ## specify the OUTPUT FORMAT
+                                 token = token_str
+                                 )
 
   ## 2.3 Finally, build the query with all parameters
 

@@ -9,7 +9,8 @@ getWebServiceData(
   layer_index,
   where_clause = "1=1",
   output_fields = "*",
-  spatial_layer = TRUE
+  spatial_layer = TRUE,
+  token_str = NULL
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ getWebServiceData(
 \item{output_fields}{An array with the list of the fields that are reuiqred with the output}
 
 \item{spatial_layer}{A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format}
+
+\item{token}{if the api is protected a token must be provided}
 }
 \value{
 The data extracted as a Data Frame or Spatial SF format
