@@ -1,0 +1,161 @@
+---
+title: "Intro to use getWebServiceData function"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Intro to use getWebServiceData function}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cefasSpatialHub)
+```
+
+## Basic use of the getWebServiceData function
+
+The getWebServiceData function retrieve data from a provided ESRI REST API URL. You need to pass a few essential parameters: 
+
+  - web_service: The url of the REST API
+  - layer_index: what layer from the API you want to query
+  
+This information is the essential because is pointing to where API of the data is located. 
+
+The additional optional parameters will define your final API url and the result of it . 
+
+```{r }
+## Example of a protected url api 
+url = "https://giserver.cefas.co.uk/devserver/rest/services/ThirdPartyData/MPA_UK_offshore_JNCC/MapServer/"
+
+## Example of a open layer api and the index layer 
+
+url_l = "https://giserver.cefas.co.uk/devserver/rest/services/fishing_activity/Landing_composition_statistics_by_species_ICES_rectangles_and_ports_2009_to_2021/MapServer/"
+ly = 8 
+
+```
+
+### Get your data as a spatial SF object or as a data.frame
+
+To choose if the data is obtained as a SF spatial object or a data frame has to be defined in the **spatial_layer** paramter. 
+By default it is TRUE and will return the data as a SF spatial object , change to FALSE if only the data frame is required
+
+```{r} spatial_layer = TRUE ```
+
+### Filter your data 
+
+The data fetched can be filtered using a SQL clause in **where_clause** parameter with the following format: 
+
+```sql ft_lyear in ( 2019, 2020 ) ```
+
+Otherwise if not WHERE parameter is provided will get all the records in the dataset ( which could delay the response)
+
+
+```{r} 
+
+where_query =  "ft_lyear in ( 2019, 2020 ) AND le_spe in  ( 'COD', 'HAD', 'WHG' ) "
+
+```
+
+
+### Get defined fields
+
+Also you can select which fields you want to as response. The default value will get all the fields in the database, otherwise the lsit has to be specified in **output_fields** parameter.
+
+```{r }
+
+output_fields = 'english_name'
+
+```
+
+### Limit the number of records 
+
+To give a first view into the data you can limit the numebr of records fetched. Otherwise the default value will retrieve all records
+
+```{r}  n_records = 10 ```
+
+### Get only the API string to open in other software (e.g QGIS )
+
+You can define **return_api** to TRUE to not return any data but instead the API url . You can copy it an use it to retrieve teh data in other sofwtare. 
+
+For example in QGIS . see example 5
+
+
+
+## EXAMPLES OF 2 USES OF THE FUNCTION
+
+
+### 1. Get the 15 first records as a SPATIAL LAYER
+
+```{r}
+
+  landings_map =     getWebServiceData ( web_service=   url_l,
+                                         layer_index = ly ,
+                                         output_fields = "*",
+                                         n_records = 15,
+                                         spatial_layer = T 
+  )
+  
+
+```
+
+
+### 2. Get all records as a DATA.FRAME
+
+```{r}
+
+    getWebServiceData ( web_service=   url_l,
+                                         layer_index = ly ,
+                                         output_fields = "*",
+                                         spatial_layer = F 
+  )
+  
+
+```
+
+### 3. Fitler the data by SQL clause and return data as SPATIAL LAYER 
+```{r}
+
+    getWebServiceData ( web_service=   url_l,
+                                         layer_index = ly ,
+                                         where_clause = where_query,
+                                         output_fields = "*",
+                                         spatial_layer = T 
+  )
+  
+
+```
+
+
+### 4. Get unique values of a field  
+```{r}
+
+      getWebServiceData ( web_service=   url_l,
+                                         layer_index = ly ,
+                                         output_fields = "english_name",
+                                         dist_values = T,
+                                         spatial_layer = F 
+  )
+  
+
+```
+
+
+### 5. Get only the constructed API string to open somewhere else (e.g. QGIS)
+```{r}
+
+      getWebServiceData ( web_service=   url_l,
+                                         layer_index = ly ,
+                                         output_fields = "*",
+                                         n_records = 5,
+                                         spatial_layer = T , 
+                                         return_api = T
+  )
+  
+
+```

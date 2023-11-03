@@ -9,8 +9,11 @@ getWebServiceData(
   layer_index,
   where_clause = "1=1",
   output_fields = "*",
+  n_records = NULL,
+  dist_values = FALSE,
   spatial_layer = TRUE,
-  token_str = NULL
+  token_str = NULL,
+  return_api = FALSE
 )
 }
 \arguments{
@@ -24,9 +27,15 @@ getWebServiceData(
   \item Filter data using SQL query - where_clause = "le_spe = 'COD' AND ft_lyear = 2021"
 }}
 
-\item{output_fields}{An array with the list of the fields that are reuiqred with the output}
+\item{output_fields}{An array with the list of the fields that are required with the output}
+
+\item{n_records}{A number with the number of records to be returned}
+
+\item{dist_values}{TRUE/FALSE to fetch unique values for the fields reuested}
 
 \item{spatial_layer}{A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format}
+
+\item{return_api}{= FALSE. TRUE if instead of the data you want to get the API URL}
 
 \item{token}{if the api is protected a token must be provided}
 }

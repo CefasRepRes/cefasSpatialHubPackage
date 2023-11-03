@@ -11,9 +11,12 @@
 #'   \item Extract all data  - where_clause = "1=1"
 #'   \item Filter data using SQL query - where_clause = "le_spe = 'COD' AND ft_lyear = 2021"
 #' }
-#' @param output_fields An array with the list of the fields that are reuiqred with the output
+#' @param output_fields An array with the list of the fields that are required with the output
+#' @param n_records A number with the number of records to be returned
+#' @param dist_values TRUE/FALSE to fetch unique values for the fields reuested
 #' @param spatial_layer A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format
 #' @param token if the api is protected a token must be provided
+#' @param return_api = FALSE. TRUE if instead of the data you want to get the API URL
 #'
 #' @return The data extracted as a Data Frame or Spatial SF format
 #'
@@ -30,7 +33,7 @@
 #' @export getWebServiceData
 
 
-getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", output_fields = "*", spatial_layer = TRUE  , token_str = NULL) {
+getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", output_fields = "*", n_records = NULL, dist_values = FALSE,  spatial_layer = TRUE  , token_str = NULL, return_api = FALSE) {
 
 
 
@@ -51,12 +54,16 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
   ## 2. Define the QUERY conditions and OUTPUT format in JSON. No GEOMETRY required , otherwise look to alternative method.
 
+
+
   if (spatial_layer == TRUE)  { return_geom = 'true'; format_out = 'geojson'   }  else  {  return_geom = 'false'; format_out = 'json' }
 
   ## 2.2 Pass the criteria for the query:
 
   webservice_base$query = list(  where =  where_clause,                                    ## specify conditions of teh data to be extracted
                                  outFields = output_fields,                                ## specify a list of columns to be return or all "*"
+                                 resultRecordCount= n_records ,
+                                 returnDistinctValues= dist_values ,
                                  returnGeometry = return_geom,                             ## specify if the geometry column is required
                                  f = format_out ,                                          ## specify the OUTPUT FORMAT
                                  token = token_str
@@ -69,38 +76,40 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
   web_service_request = build_url(webservice_base)
 
 
-  if (spatial_layer == T ) {
+  if ( return_api == TRUE ) {
+
+
+    output_data  = web_service_request
+
+  } else {
+
+      if (spatial_layer == T ) {
 
 
 
-    ### Read the API URL using SF function 'st_read'
+        ### Read the API URL using SF function 'st_read'
 
-    output_data = st_read(web_service_request)
+        wsr = readLines ( web_service_request    )
 
-
-
-
-  } else if ( spatial_layer == F) {
-
-
-    ### Read the API URL using JSONLITE function and convert into a dataframe
-
-    data_json =  jsonlite::fromJSON(web_service_request , simplifyDataFrame = T, flatten = T)
-
-    output_data  = data_json$features
-    colnames ( output_data)  = data_json$fields["name"]$name
-
-
-    ## Check the data frame has been correctly created
+        output_data = st_read(wsr)
 
 
 
 
+      } else if ( spatial_layer == F) {
 
 
+        ### Read the API URL using JSONLITE function and convert into a dataframe
 
+        data_json =  jsonlite::fromJSON(web_service_request , simplifyDataFrame = T, flatten = T)
+
+        output_data  = data_json$features
+        colnames ( output_data)  = data_json$fields["name"]$name
+
+
+        ## Check the data frame has been correctly created
+      }
   }
-
 
   return(output_data)
 
