@@ -19,7 +19,7 @@ Install the package form Github and load the library
 ```r
 
 library (devtools) ## Install "devtools" if not available
-install_github("CefasRepRes/cefasSpatialHubPackage")
+install_github("CefasRepRes/cefasSpatialHubPackage",  build_vignettes = TRUE) ## Skip updates to avoid issues ( option 3 ) 
 
 library (cefasSpatialHub)
 
@@ -44,10 +44,16 @@ landings_map %>% slice ( 1:100 ) %>% ggplot ( aes( fill = total_tons, color = to
 ```
 
 ### Explore functions documentation : 
-
+Access to function helps document
 ```r
 ?getWebServicesData
 ?getWebServicesFields
+```
 
+#### More advance documentation Vignettes
 
+```r
+
+browseVignettes("cefasSpatialHub")
+help("cefasSpatialHub")
 ```
