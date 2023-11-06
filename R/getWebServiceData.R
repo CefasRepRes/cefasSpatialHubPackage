@@ -89,7 +89,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
         ### Read the API URL using SF function 'st_read'
 
-        wsr = readLines ( web_service_request    )
+        wsr = readLines ( web_service_request  , warn=FALSE)
 
         output_data = st_read(wsr)
 

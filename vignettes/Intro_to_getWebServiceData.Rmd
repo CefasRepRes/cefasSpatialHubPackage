@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>", 
+  eval = FALSE
+  
 )
 ```
 
@@ -94,7 +96,7 @@ For example in QGIS . see example 5
 
 ```{r}
 
-  landings_map =     getWebServiceData ( web_service=   url_l,
+    getWebServiceData ( web_service=   url_l,
                                          layer_index = ly ,
                                          output_fields = "*",
                                          n_records = 15,
