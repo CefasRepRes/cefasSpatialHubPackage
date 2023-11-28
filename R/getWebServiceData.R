@@ -91,7 +91,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
         wsr = readLines ( web_service_request  , warn=FALSE)
 
-        output_data = st_read(wsr)
+        output_data = st_read(wsr, quiet = T)
 
 
 
