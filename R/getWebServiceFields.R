@@ -37,6 +37,6 @@ getWebServiceFields  = function (web_service, layer_index ) {
 
   ## 2.1 GET the list of web service fields to build your query upon :
 
-  fromJSON(  paste0 (webservice_api,'?f=json'), simplifyDataFrame = T, flatten = T)$fields
+  jsonlite::fromJSON(  paste0 (webservice_api,'?f=json'), simplifyDataFrame = T, flatten = T)$fields
 
 }

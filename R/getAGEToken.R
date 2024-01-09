@@ -28,27 +28,27 @@ getAGEToken = function ( ) {
 
   portalUrl = "https://giserver.cefas.co.uk/portal"
 
-request_body = list(  username =  "spatial.hub_data_analyst",                                    ## specify conditions of teh data to be extracted
-                      password = "D@t@Ana!yst!1234",                                ## specify a list of columns to be return or all "*"
-                      client= 'referer' ,
-                      referer = portalUrl,
-                      expiration=60 ,
-                      f = 'pjson'
-)
+  request_body = list(  username =  "spatial.hub_data_analyst",                                    ## specify conditions of teh data to be extracted
+                        password = "D@t@Ana!yst!1234",                                ## specify a list of columns to be return or all "*"
+                        client= 'referer' ,
+                        referer = portalUrl,
+                        expiration=60 ,
+                        f = 'pjson'
+  )
 
 
-result_post = POST(url  = "https://giserver.cefas.co.uk/portal/sharing/rest/generateToken/",
-               body = request_body,
-              headers = c('content-type' = 'application/x-www-form-urlencoded'))
+  result_post = httr::POST(url  = "https://giserver.cefas.co.uk/portal/sharing/rest/generateToken/",
+                           body = request_body,
+                           headers = c('content-type' = 'application/x-www-form-urlencoded')
+                           )
 
-result_text = content(result_post,  as="text")
-result =  fromJSON (result_text)
+  result_text = httr::content(result_post,  as="text")
+  result =  jsonlite::fromJSON (result_text)
 
 
-return ( result$token )
+  return ( result$token )
 
 }
-
 
 
 
