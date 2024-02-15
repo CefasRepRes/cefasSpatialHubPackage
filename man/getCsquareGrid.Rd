@@ -11,6 +11,8 @@ getCsquareGrid(spatial_layer, cell_size = 0.05, projection = 4326)
 
 \item{cell_size}{longitude of the location}
 
+\item{projection}{Projection required for the calculation of C-Square grid cells areas. Default 4326}
+
 \item{degrees}{size of the C-Square cell in decimal degrees . Default value is 0.05}
 }
 \value{
@@ -22,7 +24,7 @@ The Csquare geocoding allows to have a unique identifier for each of the locatio
 }
 \examples{
 
-token_string = getCsquareGrid (spatial_layer  , cell_size =0.05)
+token_string = getCsquareGrid (spatial_layer  , cell_size =0.05, projection = 4326)
 
 
 

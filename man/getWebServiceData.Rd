@@ -35,9 +35,9 @@ getWebServiceData(
 
 \item{spatial_layer}{A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format}
 
-\item{return_api}{= FALSE. TRUE if instead of the data you want to get the API URL}
+\item{token_str}{if the api is protected a token must be provided}
 
-\item{token}{if the api is protected a token must be provided}
+\item{return_api}{= FALSE. TRUE if instead of the data you want to get the API URL}
 }
 \value{
 The data extracted as a Data Frame or Spatial SF format
