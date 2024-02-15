@@ -11,7 +11,7 @@ Description: R Package with functionalities to access and analyse spatial data i
 License: Crown 
 Encoding: UTF-8
 LazyData: true
-Imports: httr, jsonlite, sf
+Imports: httr, jsonlite, sf, dplyr, units
 RoxygenNote: 7.2.3
 Suggests: 
     knitr,

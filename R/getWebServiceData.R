@@ -47,7 +47,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
   ## 1.2 Build API the URL
 
   webservice_api        =  paste(webservice_api, webservice_layer_index , sep = '/')
-  webservice_base       =  parse_url(webservice_api )
+  webservice_base       =  httr::parse_url(webservice_api )
   webservice_base$path  =  paste(webservice_base$path ,  'query', sep = '/' )
 
 
@@ -73,7 +73,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
 
 
-  web_service_request = build_url(webservice_base)
+  web_service_request = httr::build_url(webservice_base)
 
 
   if ( return_api == TRUE ) {
@@ -91,7 +91,7 @@ getWebServiceData = function ( web_service, layer_index , where_clause = "1=1", 
 
         wsr = readLines ( web_service_request  , warn=FALSE)
 
-        output_data = st_read(wsr, quiet = T)
+        output_data = sf::st_read(wsr, quiet = T)
 
 
 

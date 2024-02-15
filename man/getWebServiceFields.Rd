@@ -4,12 +4,14 @@
 \alias{getWebServiceFields}
 \title{Get the Spatial Hub web services field names}
 \usage{
-getWebServiceFields(web_service, layer_index)
+getWebServiceFields(web_service, layer_index, token_str = NULL)
 }
 \arguments{
 \item{web_service}{The URL of the Spatial Hub - ArcGIS Server web service .}
 
 \item{layer_index}{ArcGIS Server API's could include several layers. The index number of the required layer is here provided}
+
+\item{token}{if the api is protected a token must be provided}
 }
 \value{
 The field names list and specification in a dataframe format

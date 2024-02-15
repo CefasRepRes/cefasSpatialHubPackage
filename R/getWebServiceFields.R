@@ -6,7 +6,7 @@
 #'
 #' @param web_service The URL of the Spatial Hub - ArcGIS Server web service .
 #' @param layer_index ArcGIS Server API's could include several layers. The index number of the required layer is here provided
-#'
+#' @param token  if the api is protected a token must be provided
 #' @return The field names list and specification in a dataframe format
 #'
 #' @examples
@@ -19,7 +19,7 @@
 #'
 #' @export getWebServiceFields
 #'
-getWebServiceFields  = function (web_service, layer_index ) {
+getWebServiceFields  = function (web_service, layer_index , token_str = NULL) {
 
   ## 1. GET THE URL OF THE WEB SPATIAL LAYER API . Must include API and the layer index within the web service  ( url API + index number example below)
 
@@ -31,12 +31,9 @@ getWebServiceFields  = function (web_service, layer_index ) {
   ## 1.2 Build API the URL
 
   webservice_api        =  paste(webservice_api, webservice_layer_index , sep = '/')
-  webservice_base       =  parse_url(webservice_api )
-  webservice_base$path  =  paste(webservice_base$path ,  'query', sep = '/' )
-
 
   ## 2.1 GET the list of web service fields to build your query upon :
 
-  jsonlite::fromJSON(  paste0 (webservice_api,'?f=json'), simplifyDataFrame = T, flatten = T)$fields
+  jsonlite::fromJSON(  paste0 (webservice_api,'?f=json&token=', token_str), simplifyDataFrame = T, flatten = T)$fields
 
 }
