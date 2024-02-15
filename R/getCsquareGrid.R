@@ -7,11 +7,12 @@
 #' @param spatial_layer Spatial dataset in SF format that is intended to be gridded using C-Squares
 #' @param cell_size longitude of the location
 #' @param degrees  size of the C-Square cell in decimal degrees . Default value is 0.05
+#' @param projection Projection required for the calculation of C-Square grid cells areas. Default 4326
 #' @return A spatial grid for a required extension and with a Csquare label for each grid cell
 #'
 #' @examples
 #'
-#' token_string = getCsquareGrid (spatial_layer  , cell_size =0.05)
+#' token_string = getCsquareGrid (spatial_layer  , cell_size =0.05, projection = 4326)
 #'
 #'
 #'

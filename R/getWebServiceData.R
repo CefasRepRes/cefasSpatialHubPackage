@@ -15,7 +15,7 @@
 #' @param n_records A number with the number of records to be returned
 #' @param dist_values TRUE/FALSE to fetch unique values for the fields reuested
 #' @param spatial_layer A TRUE / FALSE parameter to return the output data in  R SF spatial format  or as a R Data Frame format
-#' @param token if the api is protected a token must be provided
+#' @param token_str if the api is protected a token must be provided
 #' @param return_api = FALSE. TRUE if instead of the data you want to get the API URL
 #'
 #' @return The data extracted as a Data Frame or Spatial SF format
